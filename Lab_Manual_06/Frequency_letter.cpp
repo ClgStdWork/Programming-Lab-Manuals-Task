@@ -1,36 +1,37 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 int main() {
-    char arr[10];           // Define a character array of size 10
-    int frequency[26] = {0}; // Array to store the frequency of each letter
-    int maxFreq = 0;        // Variable to store the highest frequency
-    char maxChar;           // Variable to store the letter with the highest frequency
+    char string[100];
+    int frequency[26] = {0};  // Array to store frequency of each letter
+    int maxFreq = 0;
 
-    // Take input from the user to fill the array
-    printf("Enter a word of up to 10 characters:\n");
-    scanf("%s", arr);
+    // Taking input from the user
+    printf("Enter a string: ");
+    scanf("%99s", string); // Correctly reading a string up to 99 characters to avoid overflow
 
-    // Calculate the frequency of each letter in the array
-    for (int i = 0; i < strlen(arr); i++) {
-        char ch = arr[i];
-        if (ch >= 'a' && ch <= 'z') { // For lowercase letters
-            frequency[ch - 'a']++;
-        } else if (ch >= 'A' && ch <= 'Z') { // For uppercase letters
-            frequency[ch - 'A']++;
+    // Calculating frequency of each letter
+    for (int i = 0; i < strlen(string); i++) {
+        
+        char ch = tolower(string[i]);
+
+        if (ch >= 'a' && ch <= 'z') {
+            frequency[ch - 'a']++;  // Correctly incrementing the frequency of the letter
+            if (frequency[ch - 'a'] > maxFreq) {  // Correctly checking the frequency against maxFreq
+                maxFreq = frequency[ch - 'a'];
+            }
         }
     }
 
-    // Find the letter with the highest frequency
+    // Finding and printing the highest frequency letter(s)
+    printf("Highest Frequency Letter(s): ");
     for (int i = 0; i < 26; i++) {
-        if (frequency[i] > maxFreq) {
-            maxFreq = frequency[i];
-            maxChar = i + 'A'; // Convert index back to character (uppercase)
+        if (frequency[i] == maxFreq) {
+            printf("%c ", i + 'a');
         }
     }
-
-    // Display the letter with the highest frequency on the console
-    printf("Highest Frequency Letter: %c\n", maxChar);
+    printf("\n");
 
     return 0;
 }
