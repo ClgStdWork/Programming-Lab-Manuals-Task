@@ -1,32 +1,41 @@
-#include<stdio.h>
-#define SIZE 10
+#include <stdio.h>
 
-int main(){
-	int Arr[SIZE];
-	for(int i=0;i<SIZE;i++)
-	{	int duplicate=0;
-		printf("Enter a Positive Integer at Index %d :",i);
-		scanf("%d",&Arr[i]);
-		for(int j=0;j<i;j++)
-		{
-		  if(i!=j && Arr[i]==Arr[j])
-		  {
-		    printf("Integer is Already in Array! Please enter a different number\n");
-		    duplicate=1;
-		    break;
-		  }
-		}
-			if(duplicate==1)
-			{
-				i--;
-			}	
-	}
-	printf("\n\nContent of Array:");
-for(int i=0;i<SIZE;i++){
-	printf("%d ",Arr[i]);
+int main() {
+    int arr[5];
+    int unique[5];
+    int count[5] = {0}; // Array to count occurrences of elements
+
+    // Taking input from the user
+    printf("Enter 5 integers:\n");
+    for (int i = 0; i < 5; i++) {
+        scanf("%d", &arr[i]);
+        unique[i] = arr[i]; // Initially assume all elements are unique
+    }
+
+    // Counting occurrences of each element
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            if (arr[i] == arr[j]) {
+                count[i]++;
+            }
+        }
+    }
+
+    int hasUnique = 0; // Flag to check if any element is unique
+    printf("Unique Elements: ");
+    for (int i = 0; i < 5; i++) {
+        if (count[i] == 1) { // Element is unique if it appears only once
+            printf("%d ", unique[i]);
+            hasUnique = 1;
+        }
+    }
+
+    // If no element is unique, print the corresponding message
+    if (!hasUnique) {
+        printf("No element is unique\n");
+    } else {
+        printf("\n");
+    }
+
+    return 0;
 }
-
-printf("\n");
-	return 0;
-}
-
