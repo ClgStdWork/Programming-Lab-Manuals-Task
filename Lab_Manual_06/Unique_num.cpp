@@ -1,37 +1,31 @@
 #include <stdio.h>
 
 int main() {
-    int arr[5];
-    int unique[5];
-    int count[5] = {0}; // Array to count occurrences of elements
+    int arr[5], i, j, isUnique, foundUnique = 0;
 
-    // Taking input from the user
-    printf("Enter 5 integers:\n");
-    for (int i = 0; i < 5; i++) {
+    // Input elements
+    printf("Enter 5 elements: ");
+    for (i = 0; i < 5; i++) {
         scanf("%d", &arr[i]);
-        unique[i] = arr[i]; // Initially assume all elements are unique
     }
 
-    // Counting occurrences of each element
-    for (int i = 0; i < 5; i++) {
-        for (int j = 0; j < 5; j++) {
+    // Check for unique elements and print them
+    for (i = 0; i < 5; i++) {
+        isUnique = 1;
+        for (j = 0; j < i; j++) {
             if (arr[i] == arr[j]) {
-                count[i]++;
+                isUnique = 0;
+                break;
             }
         }
-    }
-
-    int hasUnique = 0; // Flag to check if any element is unique
-    printf("Unique Elements: ");
-    for (int i = 0; i < 5; i++) {
-        if (count[i] == 1) { // Element is unique if it appears only once
-            printf("%d ", unique[i]);
-            hasUnique = 1;
+        if (isUnique) {
+            foundUnique = 1;
+            printf("%d, ", arr[i]);
         }
     }
 
-    // If no element is unique, print the corresponding message
-    if (!hasUnique) {
+    // Print message if no element is unique
+    if (!foundUnique) {
         printf("No element is unique\n");
     } else {
         printf("\n");
